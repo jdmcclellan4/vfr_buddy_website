@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>VFR Buddy — aviation weather for VFR pilots</title>
+    <meta
+      name="description"
+      content="Minimalist aviation weather for VFR, Sport, and Recreational pilots. Favorites, personal minimums, and NOAA METAR/TAF/SIGMET."
+    />
+    <link rel="icon" href="assets/vfr-buddy-favicon-180.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="config.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <img src="assets/vfr-buddy-favicon-180.png" alt="" width="32" height="32" />
+        VFR Buddy
+      </a>
+      <nav class="site-nav">
+        <a href="support/index.html">Support</a>
+        <a href="legal/index.html">Privacy</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <img class="hero-icon" src="assets/vfr-buddy-favicon-180.png" alt="VFR Buddy app icon" width="88" height="88" />
+        <h1>VFR Buddy</h1>
+        <p>
+          Glance at favorite-airport weather, color-coded to flight category and your personal
+          minimums.
+        </p>
+        <div class="cta-row">
+          <span class="btn disabled">App Store · Coming soon</span>
+          <span class="btn disabled">Google Play · Coming soon</span>
+        </div>
+      </section>
+
+      <section class="shots" aria-label="App screenshots">
+        <figure class="phone">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-status">9:41</div>
+              <div class="phone-body">
+                <div class="title-row">
+                  <h2 class="title">Favorites</h2>
+                  <span class="upgrade">Upgrade to Pro</span>
+                </div>
+                <p class="sub">Free · up to 3 · 2 saved</p>
+                <article class="airport-wrap">
+                  <div class="airport-row">
+                    <div class="airport-left">
+                      <div class="icao">KVER</div>
+                      <div class="airport-name">Jesse Viertel Memorial</div>
+                    </div>
+                    <div class="wx-mid">
+                      <div class="wx-line"><span class="wx-label">CLG </span>CLR</div>
+                      <div class="wx-line"><span class="wx-label">VIS </span>10SM</div>
+                      <div class="wx-line"><span class="wx-label">WIND </span>25004KT</div>
+                      <div class="wx-line"><span class="wx-label">AGE </span>12 min</div>
+                    </div>
+                    <div class="badge vfr">VFR</div>
+                  </div>
+                </article>
+                <article class="airport-wrap">
+                  <div class="airport-row">
+                    <div class="airport-left">
+                      <div class="icao">KSGF</div>
+                      <div class="airport-name">Springfield-Branson Natl</div>
+                    </div>
+                    <div class="wx-mid">
+                      <div class="wx-line"><span class="wx-label">CLG </span>BKN012</div>
+                      <div class="wx-line"><span class="wx-label">VIS </span>4SM</div>
+                      <div class="wx-line"><span class="wx-label">WIND </span>18012G18KT</div>
+                      <div class="wx-line"><span class="wx-label">AGE </span>8 min</div>
+                    </div>
+                    <div class="badge mvfr">MVFR</div>
+                  </div>
+                </article>
+                <article class="airport-wrap">
+                  <div class="airport-row">
+                    <div class="airport-left">
+                      <div class="icao">KOJC</div>
+                      <div class="airport-name">Johnson County Executive</div>
+                    </div>
+                    <div class="wx-mid">
+                      <div class="wx-line"><span class="wx-label">CLG </span>OVC008</div>
+                      <div class="wx-line"><span class="wx-label">VIS </span>2SM</div>
+                      <div class="wx-line"><span class="wx-label">WIND </span>27022G31KT</div>
+                      <div class="wx-line"><span class="wx-label">AGE </span>4 min</div>
+                    </div>
+                    <div class="badge mins">IFR<span class="tag">MINS</span></div>
+                  </div>
+                </article>
+              </div>
+              <div class="phone-tabs">
+                <span class="tab on">★ Home</span>
+                <span class="tab">⌕ Search</span>
+                <span class="tab">⚙ Settings</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>Favorites</figcaption>
+        </figure>
+
+        <figure class="phone">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-status">9:41</div>
+              <div class="phone-body">
+                <h2 class="title">Search</h2>
+                <p class="sub">City / ICAO, or leave blank for nearest weather</p>
+                <input class="search-input" type="text" readonly value="KVER" aria-label="Search example" />
+                <span class="btn">Search</span>
+                <p class="section">Match</p>
+                <div class="link-row">
+                  <span>
+                    <span class="result-icao">KVER</span><br />
+                    <span class="result-name">Jesse Viertel Memorial, MO</span>
+                  </span>
+                  <span class="chevron">›</span>
+                </div>
+              </div>
+              <div class="phone-tabs">
+                <span class="tab">★ Home</span>
+                <span class="tab on">⌕ Search</span>
+                <span class="tab">⚙ Settings</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>Search</figcaption>
+        </figure>
+
+        <figure class="phone">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-status">9:41</div>
+              <div class="phone-body">
+                <h2 class="title">Settings</h2>
+                <p class="section">Personal minimums</p>
+                <div class="card">
+                  <div class="min-row">
+                    <span class="row-label">Ceiling (ft)</span>
+                    <span class="row-value">3000</span>
+                  </div>
+                  <div class="min-row">
+                    <span class="row-label">Visibility (SM)</span>
+                    <span class="row-value">5</span>
+                  </div>
+                  <div class="min-row">
+                    <span class="row-label">Max wind (kt)</span>
+                    <span class="row-value">25</span>
+                  </div>
+                  <div class="min-row">
+                    <span class="row-label">Max gust (kt)</span>
+                    <span class="row-value">35</span>
+                  </div>
+                </div>
+                <span class="btn">Save minimums</span>
+                <p class="hint">Below mins turns the airport orange.</p>
+              </div>
+              <div class="phone-tabs">
+                <span class="tab">★ Home</span>
+                <span class="tab">⌕ Search</span>
+                <span class="tab on">⚙ Settings</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>Personal mins</figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Situational awareness only. Always obtain an official weather briefing. Weather from
+        NOAA/NWS Aviation Weather Center.
+      </p>
+      <nav>
+        <a href="legal/index.html">Privacy</a>
+        <a href="support/index.html">Support</a>
+        <a href="legal/index.html#terms">Terms</a>
+        <a href="legal/index.html#delete">Delete data</a>
+      </nav>
+      <p>
+        Support:
+        <a data-support-email href="mailto:vfrbuddy@outlook.com">vfrbuddy@outlook.com</a>
+      </p>
+    </footer>
+  </body>
+</html>
