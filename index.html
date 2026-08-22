@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>VFR Buddy — aviation weather for VFR pilots</title>
+    <title>VFR Buddy — Aviation weather simplified</title>
     <meta
       name="description"
-      content="Minimalist aviation weather for VFR, Sport, and Recreational pilots. Favorites, personal minimums, and NOAA METAR/TAF/SIGMET."
+      content="Aviation weather simplified. Fast METAR, TAF, NOTAM, and SIGMET for your favorite airports — in the app or on the home and lock screen widget."
     />
     <link rel="icon" href="assets/vfr-buddy-favicon-180.png" />
     <link rel="stylesheet" href="css/styles.css" />
@@ -30,148 +30,226 @@
       <section class="hero">
         <img class="hero-icon" src="assets/vfr-buddy-favicon-180.png" alt="VFR Buddy app icon" width="88" height="88" />
         <h1>VFR Buddy</h1>
-        <p>
-          Glance at favorite-airport weather, color-coded to flight category and your personal
-          minimums.
-        </p>
+        <p class="tagline">Aviation weather simplified</p>
+        <p>You know the destination. You know how to get there. Now you know the weather.</p>
+        <p class="cta-label">Download for FREE</p>
         <div class="cta-row">
-          <span class="btn disabled">App Store · Coming soon</span>
-          <span class="btn disabled">Google Play · Coming soon</span>
+          <span class="btn disabled">Play Store · Coming soon</span>
+          <span class="btn disabled">Apple Store · Coming soon</span>
         </div>
       </section>
 
-      <section class="shots" aria-label="App screenshots">
-        <figure class="phone">
-          <div class="phone-frame">
-            <div class="phone-screen">
-              <div class="phone-status">9:41</div>
-              <div class="phone-body">
-                <div class="title-row">
-                  <h2 class="title">Favorites</h2>
-                  <span class="upgrade">Upgrade to Pro</span>
+      <div class="features">
+        <section class="feature">
+          <div class="feature-copy">
+            <h2>Simple yet powerful</h2>
+            <p>
+              VFR Buddy is the weather app designed for VFR pilots. Whether it’s your favorite $100
+              hamburger spot or just some local sight-seeing, VFR Buddy gives you fast access to
+              weather data for your favorite airports in a simplified format in-app or on the home
+              and lock screen widget (widget available in VFR Buddy Pro).
+            </p>
+          </div>
+          <figure class="phone">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <div class="phone-status">9:41</div>
+                <div class="phone-body">
+                  <p class="section">Lock screen</p>
+                  <div class="widget-home">
+                    <div class="widget-card">
+                      <div class="widget-head">
+                        <img src="assets/vfr-buddy-favicon-180.png" alt="" width="18" height="18" />
+                        <span>VFR Buddy</span>
+                      </div>
+                      <div class="widget-row">
+                        <span class="widget-dot vfr"></span>
+                        <span class="widget-icao">KVER</span>
+                        <span class="widget-sum">10SM CLR 25004KT</span>
+                      </div>
+                      <div class="widget-row">
+                        <span class="widget-dot mvfr"></span>
+                        <span class="widget-icao">KSGF</span>
+                        <span class="widget-sum">4SM BKN012 18012G18</span>
+                      </div>
+                      <div class="widget-row">
+                        <span class="widget-dot mins"></span>
+                        <span class="widget-icao">KOJC</span>
+                        <span class="widget-sum">2SM OVC008 27022G31</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p class="sub">Free · up to 3 · 2 saved</p>
-                <article class="airport-wrap">
-                  <div class="airport-row">
-                    <div class="airport-left">
-                      <div class="icao">KVER</div>
-                      <div class="airport-name">Jesse Viertel Memorial</div>
+              </div>
+            </div>
+            <figcaption>Widget</figcaption>
+          </figure>
+        </section>
+
+        <section class="feature reverse">
+          <div class="feature-copy">
+            <h2>Flight planning starts here</h2>
+            <p>
+              Thinking about going for a flight? The color-coded interface indicates the current
+              METAR conditions at your favorite airports. Ceiling, visibility, wind, and SIGMET (if
+              any) data are also displayed for fast decision making. Instantly know at a glance if
+              you should continue preflight planning.
+            </p>
+          </div>
+          <figure class="phone">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <div class="phone-status">9:41</div>
+                <div class="phone-body">
+                  <div class="title-row">
+                    <h2 class="title">Favorites</h2>
+                    <span class="upgrade">Upgrade to Pro</span>
+                  </div>
+                  <p class="sub">Free · up to 3 · 2 saved</p>
+                  <article class="airport-wrap">
+                    <div class="airport-row">
+                      <div class="airport-left">
+                        <div class="icao">KVER</div>
+                        <div class="airport-name">Jesse Viertel Memorial</div>
+                      </div>
+                      <div class="wx-mid">
+                        <div class="wx-line"><span class="wx-label">CLG </span>CLR</div>
+                        <div class="wx-line"><span class="wx-label">VIS </span>10SM</div>
+                        <div class="wx-line"><span class="wx-label">WIND </span>25004KT</div>
+                      </div>
+                      <div class="badge vfr">VFR</div>
                     </div>
-                    <div class="wx-mid">
-                      <div class="wx-line"><span class="wx-label">CLG </span>CLR</div>
-                      <div class="wx-line"><span class="wx-label">VIS </span>10SM</div>
-                      <div class="wx-line"><span class="wx-label">WIND </span>25004KT</div>
-                      <div class="wx-line"><span class="wx-label">AGE </span>12 min</div>
+                  </article>
+                  <article class="airport-wrap">
+                    <div class="airport-row">
+                      <div class="airport-left">
+                        <div class="icao">KSGF</div>
+                        <div class="airport-name">Springfield-Branson Natl</div>
+                      </div>
+                      <div class="wx-mid">
+                        <div class="wx-line"><span class="wx-label">CLG </span>BKN012</div>
+                        <div class="wx-line"><span class="wx-label">VIS </span>4SM</div>
+                        <div class="wx-line"><span class="wx-label">WIND </span>18012G18KT</div>
+                      </div>
+                      <div class="badge mvfr">MVFR</div>
                     </div>
+                  </article>
+                  <div class="sigmet" style="margin: 0 0 10px">
+                    <div class="sigmet-label">SIGMET</div>
+                    <div class="sigmet-body">Convective · KSGF area</div>
+                  </div>
+                </div>
+                <div class="phone-tabs">
+                  <span class="tab on">★ Home</span>
+                  <span class="tab">⌕ Search</span>
+                  <span class="tab">⚙ Settings</span>
+                </div>
+              </div>
+            </div>
+            <figcaption>Home / Favorites</figcaption>
+          </figure>
+        </section>
+
+        <section class="feature">
+          <div class="feature-copy">
+            <h2>Customize for your needs</h2>
+            <p>
+              Customize the app with your personal minimums. Ceiling, visibility, wind, and wind
+              gust are all adjustable. Great for ultralight and paramotor pilots!
+            </p>
+          </div>
+          <figure class="phone">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <div class="phone-status">9:41</div>
+                <div class="phone-body">
+                  <h2 class="title">Settings</h2>
+                  <p class="section">Personal minimums</p>
+                  <div class="card">
+                    <div class="min-row">
+                      <span class="row-label">Ceiling (ft)</span>
+                      <span class="row-value">3000</span>
+                    </div>
+                    <div class="min-row">
+                      <span class="row-label">Visibility (SM)</span>
+                      <span class="row-value">5</span>
+                    </div>
+                    <div class="min-row">
+                      <span class="row-label">Max wind (kt)</span>
+                      <span class="row-value">25</span>
+                    </div>
+                    <div class="min-row">
+                      <span class="row-label">Max gust (kt)</span>
+                      <span class="row-value">35</span>
+                    </div>
+                  </div>
+                  <span class="btn">Save minimums</span>
+                  <p class="hint">Below mins turns the airport orange.</p>
+                </div>
+                <div class="phone-tabs">
+                  <span class="tab">★ Home</span>
+                  <span class="tab">⌕ Search</span>
+                  <span class="tab on">⚙ Settings</span>
+                </div>
+              </div>
+            </div>
+            <figcaption>Personal minimums</figcaption>
+          </figure>
+        </section>
+
+        <section class="feature reverse">
+          <div class="feature-copy">
+            <h2>Loaded with information, not ads</h2>
+            <p>
+              Full detail METAR, TAF, NOTAM, and SIGMET data are available with a tap of the
+              screen.
+            </p>
+          </div>
+          <figure class="phone">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <div class="phone-status">9:41</div>
+                <div class="phone-body">
+                  <div class="title-row">
+                    <h2 class="title">KVER</h2>
                     <div class="badge vfr">VFR</div>
                   </div>
-                </article>
-                <article class="airport-wrap">
-                  <div class="airport-row">
-                    <div class="airport-left">
-                      <div class="icao">KSGF</div>
-                      <div class="airport-name">Springfield-Branson Natl</div>
-                    </div>
-                    <div class="wx-mid">
-                      <div class="wx-line"><span class="wx-label">CLG </span>BKN012</div>
-                      <div class="wx-line"><span class="wx-label">VIS </span>4SM</div>
-                      <div class="wx-line"><span class="wx-label">WIND </span>18012G18KT</div>
-                      <div class="wx-line"><span class="wx-label">AGE </span>8 min</div>
-                    </div>
-                    <div class="badge mvfr">MVFR</div>
+                  <p class="sub">Jesse Viertel Memorial</p>
+                  <p class="section">METAR</p>
+                  <div class="card">
+                    <p class="body-text" style="margin: 0">
+                      Ceiling clear · Visibility 10SM · Wind 250 at 4 kt
+                    </p>
                   </div>
-                </article>
-                <article class="airport-wrap">
-                  <div class="airport-row">
-                    <div class="airport-left">
-                      <div class="icao">KOJC</div>
-                      <div class="airport-name">Johnson County Executive</div>
-                    </div>
-                    <div class="wx-mid">
-                      <div class="wx-line"><span class="wx-label">CLG </span>OVC008</div>
-                      <div class="wx-line"><span class="wx-label">VIS </span>2SM</div>
-                      <div class="wx-line"><span class="wx-label">WIND </span>27022G31KT</div>
-                      <div class="wx-line"><span class="wx-label">AGE </span>4 min</div>
-                    </div>
-                    <div class="badge mins">IFR<span class="tag">MINS</span></div>
+                  <p class="section">TAF</p>
+                  <div class="card">
+                    <p class="body-text" style="margin: 0">VFR through 00Z · Wind light</p>
                   </div>
-                </article>
-              </div>
-              <div class="phone-tabs">
-                <span class="tab on">★ Home</span>
-                <span class="tab">⌕ Search</span>
-                <span class="tab">⚙ Settings</span>
-              </div>
-            </div>
-          </div>
-          <figcaption>Favorites</figcaption>
-        </figure>
-
-        <figure class="phone">
-          <div class="phone-frame">
-            <div class="phone-screen">
-              <div class="phone-status">9:41</div>
-              <div class="phone-body">
-                <h2 class="title">Search</h2>
-                <p class="sub">City / ICAO, or leave blank for nearest weather</p>
-                <input class="search-input" type="text" readonly value="KVER" aria-label="Search example" />
-                <span class="btn">Search</span>
-                <p class="section">Match</p>
-                <div class="link-row">
-                  <span>
-                    <span class="result-icao">KVER</span><br />
-                    <span class="result-name">Jesse Viertel Memorial, MO</span>
-                  </span>
-                  <span class="chevron">›</span>
-                </div>
-              </div>
-              <div class="phone-tabs">
-                <span class="tab">★ Home</span>
-                <span class="tab on">⌕ Search</span>
-                <span class="tab">⚙ Settings</span>
-              </div>
-            </div>
-          </div>
-          <figcaption>Search</figcaption>
-        </figure>
-
-        <figure class="phone">
-          <div class="phone-frame">
-            <div class="phone-screen">
-              <div class="phone-status">9:41</div>
-              <div class="phone-body">
-                <h2 class="title">Settings</h2>
-                <p class="section">Personal minimums</p>
-                <div class="card">
-                  <div class="min-row">
-                    <span class="row-label">Ceiling (ft)</span>
-                    <span class="row-value">3000</span>
+                  <p class="section">NOTAM</p>
+                  <div class="card">
+                    <p class="body-text" style="margin: 0">RWY 18/36 closed 1200–1800Z</p>
                   </div>
-                  <div class="min-row">
-                    <span class="row-label">Visibility (SM)</span>
-                    <span class="row-value">5</span>
-                  </div>
-                  <div class="min-row">
-                    <span class="row-label">Max wind (kt)</span>
-                    <span class="row-value">25</span>
-                  </div>
-                  <div class="min-row">
-                    <span class="row-label">Max gust (kt)</span>
-                    <span class="row-value">35</span>
+                  <p class="section">SIGMET</p>
+                  <div class="card">
+                    <p class="body-text" style="margin: 0">None for this airport</p>
                   </div>
                 </div>
-                <span class="btn">Save minimums</span>
-                <p class="hint">Below mins turns the airport orange.</p>
-              </div>
-              <div class="phone-tabs">
-                <span class="tab">★ Home</span>
-                <span class="tab">⌕ Search</span>
-                <span class="tab on">⚙ Settings</span>
               </div>
             </div>
-          </div>
-          <figcaption>Personal mins</figcaption>
-        </figure>
+            <figcaption>Airport details</figcaption>
+          </figure>
+        </section>
+      </div>
+
+      <section class="pro" aria-labelledby="pro-heading">
+        <h2 id="pro-heading">Unlock VFR Buddy Pro for even more features</h2>
+        <ul>
+          <li>Unlimited favorites</li>
+          <li>Home/Lock Screen Widget</li>
+          <li>Airport Search history</li>
+          <li>Faster METAR/TAF data refreshes</li>
+        </ul>
+        <p class="pro-price">Only $1.99/year</p>
       </section>
     </main>
 
