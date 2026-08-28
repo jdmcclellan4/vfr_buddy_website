@@ -124,11 +124,20 @@ img {
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
 }
 
-.hero h1 {
+.hero .brand-mark {
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   letter-spacing: -0.02em;
+}
+
+.hero h1 {
+  color: var(--cyan);
+  font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  letter-spacing: 0;
 }
 
 .hero .tagline {
@@ -208,6 +217,15 @@ img {
 }
 
 .feature-copy h2 {
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  line-height: 1.4;
+  margin: 0 0 8px;
+}
+
+.feature-copy h3 {
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -908,4 +926,70 @@ a.chip {
 code {
   color: var(--cyan);
   font-size: 13px;
+}
+
+.guides {
+  width: min(720px, calc(100% - 32px));
+  margin: 0 auto 48px;
+}
+
+.guides h2 {
+  font-size: 13px;
+  color: var(--cyan);
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.article {
+  width: min(720px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 16px 0 48px;
+}
+
+.article h1 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+}
+
+.article .lede {
+  color: var(--soft);
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+
+.article h2 {
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 28px 0 10px;
+}
+
+.article h3 {
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin: 20px 0 8px;
+}
+
+.article p,
+.article li {
+  color: var(--soft);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.article ul {
+  padding-left: 1.2rem;
+  margin: 0 0 16px;
+}
+
+.article .cta-row {
+  margin-top: 28px;
+  justify-content: flex-start;
 }

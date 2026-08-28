@@ -3,21 +3,65 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>VFR Buddy — Aviation weather simplified</title>
+    <title>VFR Buddy: VFR Weather App &amp; Lock Screen METAR Widget for Pilots</title>
     <meta
       name="description"
-      content="Aviation Weather Simplified Fast METAR, TAF, NOTAM, and SIGMET for your favorite airports — in the app or on the home and lock screen widget."
+      content="Get instant METAR, TAF, NOTAM, and SIGMET data with personal minimums alerts. Features home &amp; lock screen aviation weather widgets for VFR, PPG, and ultralight pilots."
     />
+    <link rel="canonical" href="https://www.vfrbuddy.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.vfrbuddy.com/" />
+    <meta property="og:title" content="VFR Buddy — Aviation Weather Simplified" />
+    <meta
+      property="og:description"
+      content="Instant METAR, TAF, and SIGMET data with lock screen widgets built for VFR pilots."
+    />
+    <meta property="og:image" content="https://www.vfrbuddy.com/assets/vfr-buddy-favicon-180.png" />
+    <meta property="og:site_name" content="VFR Buddy" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="VFR Buddy — Aviation Weather Simplified" />
+    <meta
+      name="twitter:description"
+      content="Instant METAR, TAF, and SIGMET data with lock screen widgets built for VFR pilots."
+    />
+    <meta name="twitter:image" content="https://www.vfrbuddy.com/assets/vfr-buddy-favicon-180.png" />
     <link rel="icon" href="assets/vfr-buddy-favicon-180.png" />
     <link rel="stylesheet" href="css/styles.css" />
     <script src="config.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "VFR Buddy",
+        "operatingSystem": "ANDROID, IOS",
+        "applicationCategory": "WeatherApplication",
+        "description": "Simplified aviation weather app featuring METAR, TAF, NOTAM, SIGMET data, and custom lock screen widgets for pilots.",
+        "url": "https://www.vfrbuddy.com/",
+        "offers": {
+          "@type": "Offer",
+          "price": "1.99",
+          "priceCurrency": "USD",
+          "priceValidUntil": "2027-12-31"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Flight Forge LLC",
+          "url": "https://www.vfrbuddy.com"
+        }
+      }
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
     <header class="site-header">
       <a class="brand" href="index.html">
-        <img src="assets/vfr-buddy-favicon-180.png" alt="" width="32" height="32" />
+        <img
+          src="assets/vfr-buddy-favicon-180.png"
+          alt="VFR Buddy aviation weather app icon"
+          width="32"
+          height="32"
+        />
         VFR Buddy
       </a>
       <nav class="site-nav">
@@ -28,9 +72,15 @@
 
     <main id="main">
       <section class="hero">
-        <img class="hero-icon" src="assets/vfr-buddy-favicon-180.png" alt="VFR Buddy app icon" width="88" height="88" />
-        <h1>VFR Buddy</h1>
-        <p class="tagline">Aviation Weather Simplified</p>
+        <img
+          class="hero-icon"
+          src="assets/vfr-buddy-favicon-180.png"
+          alt="VFR Buddy VFR weather app icon for iOS and Android pilots"
+          width="88"
+          height="88"
+        />
+        <p class="brand-mark">VFR Buddy</p>
+        <h1>VFR Buddy — Simplified Aviation Weather &amp; METAR Widgets</h1>
         <p>You know the destination. You know how to get there. Now you know the weather.</p>
         <p class="cta-label">Download for FREE!:</p>
         <div class="cta-row">
@@ -42,7 +92,8 @@
       <div class="features">
         <section class="feature">
           <div class="feature-copy">
-            <h2>Simple yet powerful</h2>
+            <h2>Home and Lock Screen Weather Widgets</h2>
+            <h3>Simple yet powerful</h3>
             <p>
               VFR Buddy is the weather app designed for VFR pilots. Whether it’s your favorite $100
               hamburger spot or just some local sight-seeing, VFR Buddy displays weather data
@@ -50,7 +101,11 @@
               and lock screen widget (widget available in VFR Buddy Pro).
             </p>
           </div>
-          <figure class="phone">
+          <figure
+            class="phone"
+            role="img"
+            aria-label="VFR Buddy iOS and Android lock screen widget showing KVER, KSGF, and KOJC METAR weather flight categories"
+          >
             <div class="phone-frame">
               <div class="phone-screen">
                 <div class="phone-status">9:41</div>
@@ -59,7 +114,12 @@
                   <div class="widget-home">
                     <div class="widget-card">
                       <div class="widget-head">
-                        <img src="assets/vfr-buddy-favicon-180.png" alt="" width="18" height="18" />
+                        <img
+                          src="assets/vfr-buddy-favicon-180.png"
+                          alt="VFR Buddy METAR widget icon on lock screen"
+                          width="18"
+                          height="18"
+                        />
                         <span>VFR Buddy</span>
                       </div>
                       <div class="widget-row">
@@ -82,13 +142,14 @@
                 </div>
               </div>
             </div>
-            <figcaption>Widget</figcaption>
+            <figcaption>Aviation lock screen METAR widget</figcaption>
           </figure>
         </section>
 
         <section class="feature reverse">
           <div class="feature-copy">
-            <h2>Flight planning starts here</h2>
+            <h2>Instant METAR &amp; TAF Weather Data for General Aviation</h2>
+            <h3>Flight planning starts here</h3>
             <p>
               Thinking about going for a flight? The color-coded interface indicates the current
               METAR conditions at your favorite airports. Ceiling, visibility, wind, and SIGMETs (if
@@ -96,13 +157,17 @@
               can continue.
             </p>
           </div>
-          <figure class="phone">
+          <figure
+            class="phone"
+            role="img"
+            aria-label="VFR Buddy favorites list with color-coded METAR flight categories for KVER VFR and KSGF MVFR"
+          >
             <div class="phone-frame">
               <div class="phone-screen">
                 <div class="phone-status">9:41</div>
                 <div class="phone-body">
                   <div class="title-row">
-                    <h2 class="title">Favorites</h2>
+                    <div class="title">Favorites</div>
                     <span class="upgrade">Upgrade to Pro</span>
                   </div>
                   <p class="sub">Free · up to 3 · 2 saved</p>
@@ -146,24 +211,29 @@
                 </div>
               </div>
             </div>
-            <figcaption>Home / Favorites</figcaption>
+            <figcaption>Home / Favorites METAR view</figcaption>
           </figure>
         </section>
 
         <section class="feature">
           <div class="feature-copy">
-            <h2>Customize for your needs</h2>
+            <h2>Customizable Personal Minimums for VFR, Ultralight, and Paramotor Pilots</h2>
+            <h3>Customize for your needs</h3>
             <p>
               Customize the app with your personal minimums. Ceiling, visibility, wind, and wind
               gust are all adjustable. Great for ultralight and paramotor pilots!
             </p>
           </div>
-          <figure class="phone">
+          <figure
+            class="phone"
+            role="img"
+            aria-label="VFR Buddy app setting custom pilot personal minimums for ceiling, visibility, and wind gusts"
+          >
             <div class="phone-frame">
               <div class="phone-screen">
                 <div class="phone-status">9:41</div>
                 <div class="phone-body">
-                  <h2 class="title">Settings</h2>
+                  <div class="title">Settings</div>
                   <p class="section">Personal minimums</p>
                   <div class="card">
                     <div class="min-row">
@@ -193,24 +263,29 @@
                 </div>
               </div>
             </div>
-            <figcaption>Personal minimums</figcaption>
+            <figcaption>Personal minimums settings</figcaption>
           </figure>
         </section>
 
         <section class="feature reverse">
           <div class="feature-copy">
-            <h2>Loaded with information, not ads</h2>
+            <h2>METAR, TAF, NOTAM &amp; SIGMET in one tap</h2>
+            <h3>Loaded with information, not ads</h3>
             <p>
               Full detail METAR, TAF, NOTAM, and SIGMET data are available with a tap.
             </p>
           </div>
-          <figure class="phone">
+          <figure
+            class="phone"
+            role="img"
+            aria-label="VFR Buddy airport details showing METAR, TAF, NOTAM, and SIGMET for KVER"
+          >
             <div class="phone-frame">
               <div class="phone-screen">
                 <div class="phone-status">9:41</div>
                 <div class="phone-body">
                   <div class="title-row">
-                    <h2 class="title">KVER</h2>
+                    <div class="title">KVER</div>
                     <div class="badge vfr">VFR</div>
                   </div>
                   <p class="sub">Jesse Viertel Memorial</p>
@@ -235,13 +310,13 @@
                 </div>
               </div>
             </div>
-            <figcaption>Airport details</figcaption>
+            <figcaption>Airport METAR TAF NOTAM details</figcaption>
           </figure>
         </section>
       </div>
 
       <section class="pro" aria-labelledby="pro-heading">
-        <h2 id="pro-heading">Unlock VFR Buddy Pro for even more features</h2>
+        <h2 id="pro-heading">Upgrade to VFR Buddy Pro ($1.99/year)</h2>
         <ul>
           <li>Unlimited favorites</li>
           <li>Home/Lock Screen Widget</li>
@@ -249,6 +324,31 @@
           <li>Faster METAR/TAF data refreshes</li>
         </ul>
         <p class="pro-price">Only $1.99/year</p>
+      </section>
+
+      <section class="guides" aria-labelledby="guides-heading">
+        <h2 id="guides-heading">Guides</h2>
+        <a class="link-row" href="paramotor-weather-app/index.html">
+          <span>
+            <span class="result-icao">Paramotor weather app</span><br />
+            <span class="result-name">PPG and ultralight wind, gust, and METAR tools</span>
+          </span>
+          <span class="chevron">›</span>
+        </a>
+        <a class="link-row" href="aviation-lock-screen-widget/index.html">
+          <span>
+            <span class="result-icao">Aviation lock screen widget</span><br />
+            <span class="result-name">METAR on Android and iOS home and lock screens</span>
+          </span>
+          <span class="chevron">›</span>
+        </a>
+        <a class="link-row" href="vfr-personal-minimums-guide/index.html">
+          <span>
+            <span class="result-icao">VFR personal minimums</span><br />
+            <span class="result-name">How to set ceiling, visibility, wind, and gust limits</span>
+          </span>
+          <span class="chevron">›</span>
+        </a>
       </section>
     </main>
 
@@ -262,6 +362,9 @@
         <a href="support/index.html">Support</a>
         <a href="legal/index.html#terms">Terms</a>
         <a href="legal/index.html#delete">Delete data</a>
+        <a href="paramotor-weather-app/index.html">Paramotor weather</a>
+        <a href="aviation-lock-screen-widget/index.html">Lock screen widget</a>
+        <a href="vfr-personal-minimums-guide/index.html">Personal minimums</a>
       </nav>
       <p>
         Support:
