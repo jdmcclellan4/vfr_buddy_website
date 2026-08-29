@@ -30,6 +30,10 @@ DOCK_ICONS = [
     (304, 678, 370, 758),   # VFR Buddy
 ]
 SEARCH_BAR = (16, 784, 378, 858)
+# White pill only — excludes black wallpaper margins in the search crop
+SEARCH_PILL = (30, 790, 363, 839)
+# Raise icon rows above the search bar (emu pixels)
+ICON_LIFT_EMU = 55
 
 
 def cover_resize(img: Image.Image, width: int, height: int) -> Image.Image:
@@ -114,31 +118,24 @@ def main() -> None:
 
     icon_w = int(66 * emu_scale())
 
-    # Layout mirrors the emulator reference (centers + tops)
+    # Layout mirrors the emulator reference, lifted above the search bar
+    middle_y = 530 - ICON_LIFT_EMU
+    dock_y = 678 - ICON_LIFT_EMU
     for crop in MIDDLE_ICONS:
         cx, _ = emu_center(crop)
-        paste_full_icon(canvas, emulator, crop, center_x_emu=cx, top_y_emu=530, target_width=icon_w)
+        paste_full_icon(canvas, emulator, crop, center_x_emu=cx, top_y_emu=middle_y, target_width=icon_w)
 
     for crop in DOCK_ICONS:
         cx, _ = emu_center(crop)
-        paste_full_icon(canvas, emulator, crop, center_x_emu=cx, top_y_emu=678, target_width=icon_w)
+        paste_full_icon(canvas, emulator, crop, center_x_emu=cx, top_y_emu=dock_y, target_width=icon_w)
 
-    # Search bar — full crop including white pill, scaled to fill the bar area
-    sx = emu_scale()
+    # Search bar — white pill only, scaled to full width (no black margins)
     sy = (H - STATUS_CROP) / EMU_H
-    x1, y1, x2, y2 = SEARCH_BAR
-    dest = (
-        int(x1 * sx),
-        int(y1 * sy) + STATUS_CROP,
-        int(x2 * sx),
-        int(y2 * sy) + STATUS_CROP,
-    )
-    # Widen slightly to match modern phone search bar width
-    dest_h = dest[3] - dest[1]
+    pill_h = int((SEARCH_PILL[3] - SEARCH_PILL[1]) * sy)
     dest_w = int(W * 0.9)
     dest_x = (W - dest_w) // 2
-    dest_y = dest[1]
-    search = emulator.crop(SEARCH_BAR).resize((dest_w, dest_h), Image.Resampling.LANCZOS)
+    dest_y = int(SEARCH_PILL[1] * sy) + STATUS_CROP
+    search = emulator.crop(SEARCH_PILL).resize((dest_w, pill_h), Image.Resampling.LANCZOS)
     canvas.alpha_composite(search.convert("RGBA"), (dest_x, dest_y))
 
     nav = ImageDraw.Draw(canvas)
