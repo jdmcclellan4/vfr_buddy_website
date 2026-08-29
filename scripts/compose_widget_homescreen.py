@@ -40,19 +40,20 @@ def cover_resize(img: Image.Image, width: int, height: int) -> Image.Image:
     return resized.crop((left, top, left + width, top + height))
 
 
-def key_dark(img: Image.Image, threshold: int = 34) -> Image.Image:
+def key_dark(img: Image.Image, threshold: int = 42) -> Image.Image:
+    """Make near-black launcher wallpaper pixels transparent."""
     rgba = img.convert("RGBA")
     pixels = rgba.load()
     w, h = rgba.size
     for y in range(h):
         for x in range(w):
             r, g, b, a = pixels[x, y]
-            if r < threshold and g < threshold and b < threshold:
+            if max(r, g, b) < threshold:
                 pixels[x, y] = (0, 0, 0, 0)
     return rgba
 
 
-def paste_crop(
+def paste_crop_fit(
     canvas: Image.Image,
     source: Image.Image,
     crop: tuple[int, int, int, int],
@@ -60,11 +61,22 @@ def paste_crop(
     *,
     keyed: bool = True,
 ) -> None:
+    """Paste a crop scaled to fit dest box without stretching."""
     piece = source.crop(crop)
     if keyed:
         piece = key_dark(piece)
-    piece = piece.resize((dest[2] - dest[0], dest[3] - dest[1]), Image.Resampling.LANCZOS)
-    canvas.alpha_composite(piece, (dest[0], dest[1]))
+
+    dest_w = dest[2] - dest[0]
+    dest_h = dest[3] - dest[1]
+    src_w, src_h = piece.size
+    scale = min(dest_w / src_w, dest_h / src_h)
+    new_w = max(1, int(src_w * scale))
+    new_h = max(1, int(src_h * scale))
+    piece = piece.resize((new_w, new_h), Image.Resampling.LANCZOS)
+
+    x = dest[0] + (dest_w - new_w) // 2
+    y = dest[1] + (dest_h - new_h) // 2
+    canvas.alpha_composite(piece, (x, y))
 
 
 def main() -> None:
@@ -93,33 +105,40 @@ def main() -> None:
     canvas.alpha_composite(shadow, (wx - 14, wy - 10))
     canvas.alpha_composite(widget_resized, (wx, wy))
 
-    row_y = int(H * 0.57)
-    icon_w = int(W * 0.19)
-    icon_h = int(icon_w * 1.28)
-    gap = int(W * 0.075)
-    start_x = (W - (3 * icon_w + 2 * gap)) // 2
+    # Middle row — tall slots, fit icons without stretch (matches emulator proportions)
+    row_y = int(H * 0.555)
+    slot_w = int(W * 0.17)
+    slot_h = int(slot_w * (118 / 66))  # source aspect
+    gap = int(W * 0.09)
+    start_x = (W - (3 * slot_w + 2 * gap)) // 2
     for i, crop in enumerate(MIDDLE_ICONS):
-        dest = (start_x + i * (icon_w + gap), row_y, start_x + i * (icon_w + gap) + icon_w, row_y + icon_h)
-        paste_crop(canvas, emulator, crop, dest)
+        dest = (
+            start_x + i * (slot_w + gap),
+            row_y,
+            start_x + i * (slot_w + gap) + slot_w,
+            row_y + slot_h,
+        )
+        paste_crop_fit(canvas, emulator, crop, dest)
 
-    dock_y = int(H * 0.775)
-    dock_icon = int(W * 0.145)
-    dock_gap = int(W * 0.04)
-    dock_start = (W - (4 * dock_icon + 3 * dock_gap)) // 2
+    # Dock — square slots, keyed so dark plate disappears
+    dock_y = int(H * 0.768)
+    dock_slot = int(W * 0.155)
+    dock_gap = int(W * 0.045)
+    dock_start = (W - (4 * dock_slot + 3 * dock_gap)) // 2
     for i, crop in enumerate(DOCK_ICONS):
         dest = (
-            dock_start + i * (dock_icon + dock_gap),
+            dock_start + i * (dock_slot + dock_gap),
             dock_y,
-            dock_start + i * (dock_icon + dock_gap) + dock_icon,
-            dock_y + dock_icon,
+            dock_start + i * (dock_slot + dock_gap) + dock_slot,
+            dock_y + dock_slot,
         )
-        paste_crop(canvas, emulator, crop, dest, keyed=False)
+        paste_crop_fit(canvas, emulator, crop, dest)
 
     search_h = int(W * 0.135)
     search_y = int(H * 0.885)
     search_w = int(W * 0.9)
     search_x = (W - search_w) // 2
-    paste_crop(
+    paste_crop_fit(
         canvas,
         emulator,
         SEARCH_BAR,
