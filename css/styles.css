@@ -246,8 +246,22 @@ img {
   justify-self: center;
 }
 
-.feature .phone-screen {
-  height: 460px;
+.phone-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 26px;
+  vertical-align: top;
+}
+
+.phone-shot--widget {
+  border-radius: 20px;
+  background: #071422;
+}
+
+.feature .phone-frame:has(.phone-shot--widget) {
+  padding: 16px 12px;
+  background: linear-gradient(160deg, #0a3d62 0%, #071422 45%, #041018 100%);
 }
 
 .feature .airport-row {
@@ -448,7 +462,7 @@ img {
 .site-footer {
   width: min(1100px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 24px 0 40px;
+  padding: 24px 0 calc(64px + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 13px;
