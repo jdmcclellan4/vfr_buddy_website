@@ -15,23 +15,19 @@ WALLPAPER = ASSETS / "aircraft-wallpaper.png"
 EMULATOR = Path(
     r"C:\Users\jdmcc\.cursor\projects\c-Users-jdmcc-cursor-VFR-buddy\assets\c__Users_jdmcc_AppData_Roaming_Cursor_User_workspaceStorage_11552ccf61fbf25ce5a68abe20f5a517_images_image-3939f217-3d63-4e3b-a6f7-15a91c1046f4.png"
 )
+EMU_W, EMU_H = 394, 895
 
-# Icon circle + label regions on the 394x895 emulator reference
-MIDDLE_ICON_CIRCLES = [
-    (118, 530, 184, 596),
-    (210, 530, 276, 596),
-    (302, 530, 368, 596),
+# Full icon crops from emulator — never split or trim
+MIDDLE_ICONS = [
+    (118, 530, 184, 648),   # Gmail + label
+    (210, 530, 276, 648),   # Photos + label
+    (302, 530, 368, 648),   # YouTube + label
 ]
-MIDDLE_LABELS = [
-    (118, 596, 184, 648),
-    (210, 596, 276, 648),
-    (302, 596, 368, 648),
-]
-DOCK_ICON_CIRCLES = [
-    (28, 678, 94, 744),
-    (120, 678, 186, 744),
-    (212, 678, 278, 744),
-    (304, 678, 370, 744),
+DOCK_ICONS = [
+    (28, 678, 94, 758),     # Phone
+    (120, 678, 186, 758),   # Messages
+    (212, 678, 278, 758),   # Chrome
+    (304, 678, 370, 758),   # VFR Buddy
 ]
 SEARCH_BAR = (16, 784, 378, 858)
 
@@ -57,33 +53,37 @@ def key_dark(img: Image.Image, threshold: int = 42) -> Image.Image:
     return rgba
 
 
-def paste_square_icon(
+def emu_scale() -> float:
+    return W / EMU_W
+
+
+def emu_center(box: tuple[int, int, int, int]) -> tuple[int, int]:
+    x1, y1, x2, y2 = box
+    return ((x1 + x2) / 2, (y1 + y2) / 2)
+
+
+def paste_full_icon(
     canvas: Image.Image,
     source: Image.Image,
     crop: tuple[int, int, int, int],
-    center_x: int,
-    top_y: int,
-    size: int,
+    *,
+    center_x_emu: float,
+    top_y_emu: float,
+    target_width: int,
 ) -> None:
+    """Paste the full emulator crop scaled uniformly; same icon width for every app."""
     piece = key_dark(source.crop(crop))
-    piece = piece.resize((size, size), Image.Resampling.LANCZOS)
-    x = center_x - size // 2
-    canvas.alpha_composite(piece, (x, top_y))
+    src_w = crop[2] - crop[0]
+    src_h = crop[3] - crop[1]
+    scale = target_width / src_w
+    new_w = max(1, int(src_w * scale))
+    new_h = max(1, int(src_h * scale))
+    piece = piece.resize((new_w, new_h), Image.Resampling.LANCZOS)
 
-
-def paste_label(
-    canvas: Image.Image,
-    source: Image.Image,
-    crop: tuple[int, int, int, int],
-    center_x: int,
-    top_y: int,
-    width: int,
-    height: int,
-) -> None:
-    piece = key_dark(source.crop(crop))
-    piece = piece.resize((width, height), Image.Resampling.LANCZOS)
-    x = center_x - width // 2
-    canvas.alpha_composite(piece, (x, top_y))
+    s = emu_scale()
+    cx = int(center_x_emu * s)
+    top = int(top_y_emu * s) + STATUS_CROP
+    canvas.alpha_composite(piece, (cx - new_w // 2, top))
 
 
 def main() -> None:
@@ -112,56 +112,34 @@ def main() -> None:
     canvas.alpha_composite(shadow, (wx - 14, wy - 10))
     canvas.alpha_composite(widget_resized, (wx, wy))
 
-    icon_size = int(W * 0.118)
-    label_h = int(icon_size * 0.34)
-    label_w = int(icon_size * 1.15)
-    icon_gap = int(W * 0.095)
+    icon_w = int(66 * emu_scale())
 
-    # Middle row — 3 icons, same circle size as dock
-    middle_count = 3
-    middle_span = middle_count * icon_size + (middle_count - 1) * icon_gap
-    middle_start = (W - middle_span) // 2 + icon_size // 2
-    middle_y = int(H * 0.555)
-    label_y = middle_y + icon_size + int(icon_size * 0.08)
+    # Layout mirrors the emulator reference (centers + tops)
+    for crop in MIDDLE_ICONS:
+        cx, _ = emu_center(crop)
+        paste_full_icon(canvas, emulator, crop, center_x_emu=cx, top_y_emu=530, target_width=icon_w)
 
-    for i, (icon_crop, label_crop) in enumerate(zip(MIDDLE_ICON_CIRCLES, MIDDLE_LABELS, strict=True)):
-        cx = middle_start + i * (icon_size + icon_gap)
-        paste_square_icon(canvas, emulator, icon_crop, cx, middle_y, icon_size)
-        paste_label(canvas, emulator, label_crop, cx, label_y, label_w, label_h)
+    for crop in DOCK_ICONS:
+        cx, _ = emu_center(crop)
+        paste_full_icon(canvas, emulator, crop, center_x_emu=cx, top_y_emu=678, target_width=icon_w)
 
-    # Dock — 4 icons, identical circle size
-    dock_count = 4
-    dock_span = dock_count * icon_size + (dock_count - 1) * icon_gap
-    dock_start = (W - dock_span) // 2 + icon_size // 2
-    dock_y = int(H * 0.745)
-
-    for i, icon_crop in enumerate(DOCK_ICON_CIRCLES):
-        cx = dock_start + i * (icon_size + icon_gap)
-        paste_square_icon(canvas, emulator, icon_crop, cx, dock_y, icon_size)
-
-    # Search bar — white pill background + keyed contents
-    search_w = int(W * 0.9)
-    search_h = int(W * 0.128)
-    search_x = (W - search_w) // 2
-    search_y = int(H * 0.868)
-    pill_layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    pill_draw = ImageDraw.Draw(pill_layer)
-    pill_draw.rounded_rectangle(
-        (search_x, search_y, search_x + search_w, search_y + search_h),
-        radius=search_h // 2,
-        fill=(255, 255, 255, 248),
+    # Search bar — full crop including white pill, scaled to fill the bar area
+    sx = emu_scale()
+    sy = (H - STATUS_CROP) / EMU_H
+    x1, y1, x2, y2 = SEARCH_BAR
+    dest = (
+        int(x1 * sx),
+        int(y1 * sy) + STATUS_CROP,
+        int(x2 * sx),
+        int(y2 * sy) + STATUS_CROP,
     )
-    canvas = Image.alpha_composite(canvas, pill_layer)
-
-    search_inner = key_dark(emulator.crop(SEARCH_BAR))
-    inner_scale = min((search_w - 24) / search_inner.width, (search_h - 12) / search_inner.height)
-    inner_w = max(1, int(search_inner.width * inner_scale))
-    inner_h = max(1, int(search_inner.height * inner_scale))
-    search_inner = search_inner.resize((inner_w, inner_h), Image.Resampling.LANCZOS)
-    canvas.alpha_composite(
-        search_inner,
-        (search_x + (search_w - inner_w) // 2, search_y + (search_h - inner_h) // 2),
-    )
+    # Widen slightly to match modern phone search bar width
+    dest_h = dest[3] - dest[1]
+    dest_w = int(W * 0.9)
+    dest_x = (W - dest_w) // 2
+    dest_y = dest[1]
+    search = emulator.crop(SEARCH_BAR).resize((dest_w, dest_h), Image.Resampling.LANCZOS)
+    canvas.alpha_composite(search.convert("RGBA"), (dest_x, dest_y))
 
     nav = ImageDraw.Draw(canvas)
     pill_w, pill_h = 220, 10
