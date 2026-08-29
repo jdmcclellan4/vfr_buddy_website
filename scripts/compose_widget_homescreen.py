@@ -16,17 +16,22 @@ EMULATOR = Path(
     r"C:\Users\jdmcc\.cursor\projects\c-Users-jdmcc-cursor-VFR-buddy\assets\c__Users_jdmcc_AppData_Roaming_Cursor_User_workspaceStorage_11552ccf61fbf25ce5a68abe20f5a517_images_image-3939f217-3d63-4e3b-a6f7-15a91c1046f4.png"
 )
 
-# Measured from the 394x895 emulator reference image
-MIDDLE_ICONS = [
-    (118, 530, 184, 648),   # Gmail
-    (210, 530, 276, 648),   # Photos
-    (302, 530, 368, 648),   # YouTube
+# Icon circle + label regions on the 394x895 emulator reference
+MIDDLE_ICON_CIRCLES = [
+    (118, 530, 184, 596),
+    (210, 530, 276, 596),
+    (302, 530, 368, 596),
 ]
-DOCK_ICONS = [
-    (28, 678, 94, 758),     # Phone
-    (120, 678, 186, 758),   # Messages
-    (212, 678, 278, 758),   # Chrome
-    (304, 678, 370, 758),   # VFR Buddy
+MIDDLE_LABELS = [
+    (118, 596, 184, 648),
+    (210, 596, 276, 648),
+    (302, 596, 368, 648),
+]
+DOCK_ICON_CIRCLES = [
+    (28, 678, 94, 744),
+    (120, 678, 186, 744),
+    (212, 678, 278, 744),
+    (304, 678, 370, 744),
 ]
 SEARCH_BAR = (16, 784, 378, 858)
 
@@ -41,7 +46,6 @@ def cover_resize(img: Image.Image, width: int, height: int) -> Image.Image:
 
 
 def key_dark(img: Image.Image, threshold: int = 42) -> Image.Image:
-    """Make near-black launcher wallpaper pixels transparent."""
     rgba = img.convert("RGBA")
     pixels = rgba.load()
     w, h = rgba.size
@@ -53,30 +57,33 @@ def key_dark(img: Image.Image, threshold: int = 42) -> Image.Image:
     return rgba
 
 
-def paste_crop_fit(
+def paste_square_icon(
     canvas: Image.Image,
     source: Image.Image,
     crop: tuple[int, int, int, int],
-    dest: tuple[int, int, int, int],
-    *,
-    keyed: bool = True,
+    center_x: int,
+    top_y: int,
+    size: int,
 ) -> None:
-    """Paste a crop scaled to fit dest box without stretching."""
-    piece = source.crop(crop)
-    if keyed:
-        piece = key_dark(piece)
+    piece = key_dark(source.crop(crop))
+    piece = piece.resize((size, size), Image.Resampling.LANCZOS)
+    x = center_x - size // 2
+    canvas.alpha_composite(piece, (x, top_y))
 
-    dest_w = dest[2] - dest[0]
-    dest_h = dest[3] - dest[1]
-    src_w, src_h = piece.size
-    scale = min(dest_w / src_w, dest_h / src_h)
-    new_w = max(1, int(src_w * scale))
-    new_h = max(1, int(src_h * scale))
-    piece = piece.resize((new_w, new_h), Image.Resampling.LANCZOS)
 
-    x = dest[0] + (dest_w - new_w) // 2
-    y = dest[1] + (dest_h - new_h) // 2
-    canvas.alpha_composite(piece, (x, y))
+def paste_label(
+    canvas: Image.Image,
+    source: Image.Image,
+    crop: tuple[int, int, int, int],
+    center_x: int,
+    top_y: int,
+    width: int,
+    height: int,
+) -> None:
+    piece = key_dark(source.crop(crop))
+    piece = piece.resize((width, height), Image.Resampling.LANCZOS)
+    x = center_x - width // 2
+    canvas.alpha_composite(piece, (x, top_y))
 
 
 def main() -> None:
@@ -105,50 +112,60 @@ def main() -> None:
     canvas.alpha_composite(shadow, (wx - 14, wy - 10))
     canvas.alpha_composite(widget_resized, (wx, wy))
 
-    # Middle row — tall slots, fit icons without stretch (matches emulator proportions)
-    row_y = int(H * 0.555)
-    slot_w = int(W * 0.17)
-    slot_h = int(slot_w * (118 / 66))  # source aspect
-    gap = int(W * 0.09)
-    start_x = (W - (3 * slot_w + 2 * gap)) // 2
-    for i, crop in enumerate(MIDDLE_ICONS):
-        dest = (
-            start_x + i * (slot_w + gap),
-            row_y,
-            start_x + i * (slot_w + gap) + slot_w,
-            row_y + slot_h,
-        )
-        paste_crop_fit(canvas, emulator, crop, dest)
+    icon_size = int(W * 0.118)
+    label_h = int(icon_size * 0.34)
+    label_w = int(icon_size * 1.15)
+    icon_gap = int(W * 0.095)
 
-    # Dock — square slots, keyed so dark plate disappears
-    dock_y = int(H * 0.768)
-    dock_slot = int(W * 0.155)
-    dock_gap = int(W * 0.045)
-    dock_start = (W - (4 * dock_slot + 3 * dock_gap)) // 2
-    for i, crop in enumerate(DOCK_ICONS):
-        dest = (
-            dock_start + i * (dock_slot + dock_gap),
-            dock_y,
-            dock_start + i * (dock_slot + dock_gap) + dock_slot,
-            dock_y + dock_slot,
-        )
-        paste_crop_fit(canvas, emulator, crop, dest)
+    # Middle row — 3 icons, same circle size as dock
+    middle_count = 3
+    middle_span = middle_count * icon_size + (middle_count - 1) * icon_gap
+    middle_start = (W - middle_span) // 2 + icon_size // 2
+    middle_y = int(H * 0.555)
+    label_y = middle_y + icon_size + int(icon_size * 0.08)
 
-    search_h = int(W * 0.135)
-    search_y = int(H * 0.885)
+    for i, (icon_crop, label_crop) in enumerate(zip(MIDDLE_ICON_CIRCLES, MIDDLE_LABELS, strict=True)):
+        cx = middle_start + i * (icon_size + icon_gap)
+        paste_square_icon(canvas, emulator, icon_crop, cx, middle_y, icon_size)
+        paste_label(canvas, emulator, label_crop, cx, label_y, label_w, label_h)
+
+    # Dock — 4 icons, identical circle size
+    dock_count = 4
+    dock_span = dock_count * icon_size + (dock_count - 1) * icon_gap
+    dock_start = (W - dock_span) // 2 + icon_size // 2
+    dock_y = int(H * 0.745)
+
+    for i, icon_crop in enumerate(DOCK_ICON_CIRCLES):
+        cx = dock_start + i * (icon_size + icon_gap)
+        paste_square_icon(canvas, emulator, icon_crop, cx, dock_y, icon_size)
+
+    # Search bar — white pill background + keyed contents
     search_w = int(W * 0.9)
+    search_h = int(W * 0.128)
     search_x = (W - search_w) // 2
-    paste_crop_fit(
-        canvas,
-        emulator,
-        SEARCH_BAR,
+    search_y = int(H * 0.868)
+    pill_layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    pill_draw = ImageDraw.Draw(pill_layer)
+    pill_draw.rounded_rectangle(
         (search_x, search_y, search_x + search_w, search_y + search_h),
-        keyed=False,
+        radius=search_h // 2,
+        fill=(255, 255, 255, 248),
+    )
+    canvas = Image.alpha_composite(canvas, pill_layer)
+
+    search_inner = key_dark(emulator.crop(SEARCH_BAR))
+    inner_scale = min((search_w - 24) / search_inner.width, (search_h - 12) / search_inner.height)
+    inner_w = max(1, int(search_inner.width * inner_scale))
+    inner_h = max(1, int(search_inner.height * inner_scale))
+    search_inner = search_inner.resize((inner_w, inner_h), Image.Resampling.LANCZOS)
+    canvas.alpha_composite(
+        search_inner,
+        (search_x + (search_w - inner_w) // 2, search_y + (search_h - inner_h) // 2),
     )
 
-    pill = ImageDraw.Draw(canvas)
+    nav = ImageDraw.Draw(canvas)
     pill_w, pill_h = 220, 10
-    pill.rounded_rectangle(
+    nav.rounded_rectangle(
         ((W - pill_w) // 2, H - 34, (W + pill_w) // 2, H - 34 + pill_h),
         radius=5,
         fill=(255, 255, 255, 220),
