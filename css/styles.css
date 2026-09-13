@@ -1,4 +1,4 @@
-/* Tokens from src/theme.ts — exact values */
+/* Tokens from src/theme.ts - exact values */
 :root {
   --navy: #0B1F3A;
   --navy-card: #122A45;
@@ -901,7 +901,7 @@ a.chip {
   margin: 0;
 }
 
-/* Bottom tab bar — RootNavigator tabBarStyle */
+/* Bottom tab bar - RootNavigator tabBarStyle */
 .tabbar {
   position: sticky;
   bottom: 0;
