@@ -156,7 +156,7 @@ def main() -> None:
 
     root = dump_ui(device)
 
-    # Bottom tabs — Search ~ center, Settings ~ right (1080x2300 typical)
+    # Bottom tabs - Search ~ center, Settings ~ right (1080x2300 typical)
     home_tab = find_contains(root, "Home") or (180, 2220)
     search_tab = find_contains(root, "Search") or (540, 2220)
     settings_tab = find_contains(root, "Settings") or (900, 2220)
@@ -226,7 +226,7 @@ def main() -> None:
     tap(device, *home_tab)
     wait(2, device)
 
-    # 4. Airport detail — tap first ICAO row
+    # 4. Airport detail - tap first ICAO row
     tap(device, *home_tab)
     wait(2, device)
     root = dump_ui(device)

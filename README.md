@@ -23,7 +23,7 @@ Marketing and compliance site for **Google Play** (App Store later). Operated by
 
 Pro is a **$4.99 / year** Google Play subscription when billing is live:
 
-- **Does the app collect user data?** Yes — precise location, only if the user requests nearest weather. Used for app functionality. Not linked to identity. Not used for advertising. Not sold. Shared with NOAA AWC as a bounding box.
+- **Does the app collect user data?** Yes - precise location, only if the user requests nearest weather. Used for app functionality. Not linked to identity. Not used for advertising. Not sold. Shared with NOAA AWC as a bounding box.
 - **Other data:** Favorites and settings stay on-device only.
 - **Account creation:** No.
 - **Data deletion:** Users uninstall the app. No cloud account.
