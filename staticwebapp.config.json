@@ -2,17 +2,7 @@
   "trailingSlash": "auto",
   "routes": [
     {
-      "route": "/aviation-lock-screen-widget",
-      "redirect": "/aviation-home-screen-widget/",
-      "statusCode": 301
-    },
-    {
-      "route": "/aviation-lock-screen-widget/",
-      "redirect": "/aviation-home-screen-widget/",
-      "statusCode": 301
-    },
-    {
-      "route": "/aviation-lock-screen-widget/*",
+      "route": "/aviation-lock-screen-widget*",
       "redirect": "/aviation-home-screen-widget/",
       "statusCode": 301
     }
