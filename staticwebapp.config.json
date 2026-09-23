@@ -7,15 +7,10 @@
       "statusCode": 301
     }
   ],
-  "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": [
-      "/assets/*",
-      "/css/*",
-      "/config.js",
-      "/robots.txt",
-      "/sitemap.xml",
-      "/*.{png,jpg,jpeg,gif,webp,ico,svg,css,js,txt,xml}"
-    ]
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html",
+      "statusCode": 200
+    }
   }
 }
