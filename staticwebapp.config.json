@@ -6,11 +6,5 @@
       "redirect": "/aviation-home-screen-widget/",
       "statusCode": 301
     }
-  ],
-  "responseOverrides": {
-    "404": {
-      "rewrite": "/index.html",
-      "statusCode": 200
-    }
-  }
+  ]
 }
