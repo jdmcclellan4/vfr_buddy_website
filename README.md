@@ -11,13 +11,17 @@ Marketing and compliance site for **Google Play** (App Store later). Operated by
 
 ## Deploy on Azure Static Web Apps
 
-1. In [Azure portal](https://portal.azure.com), create a **Static Web App** (Free plan).
-2. Connect this GitHub repo (`jdmcclellan4/vfr_buddy_website`), branch `main`.
-3. Build settings:
-   - **App location:** `/` (repo root)
-   - **Api location:** empty
-   - **Output location:** empty
-4. Copy the live `https://<name>.azurestaticapps.net` host into Play Console and into `SITE_ORIGIN` in the app repo (`vfr_buddy` → `src/config.ts`).
+**Canonical host:** `https://www.vfrbuddy.com` (custom domain on the SWA).
+
+If the site is down (404 on Azure, failed GitHub Action with “No matching Static Web App”), follow **[docs/AZURE-RESTORE.md](docs/AZURE-RESTORE.md)** end to end.
+
+Quick checklist:
+
+1. [Azure portal](https://portal.azure.com) → **Static Web App** (Free) linked to **`jdmcclellan4/vfr_buddy_website`** / `main`.
+2. Build: **app location** `/`, no API, no output (static files only; `skip_app_build` in workflow).
+3. Copy the SWA **deployment token** into GitHub secret **`AZURE_STATIC_WEB_APPS_API_TOKEN`**.
+4. SWA **Custom domains** → `www.vfrbuddy.com`; update GoDaddy **www** CNAME to the new `*.azurestaticapps.net` host Azure shows (the old `red-field-…` name is dead).
+5. Verify `/legal/` and `/support/` before Play Console updates.
 
 ## Google Play Data safety (match this policy)
 
