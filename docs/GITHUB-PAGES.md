@@ -8,12 +8,15 @@ Every push to `main` runs **Deploy GitHub Pages** (`.github/workflows/github-pag
 
 Project URL (before custom domain): **https://jdmcclellan4.github.io/vfr_buddy_website/**
 
-## One-time GitHub setup
+## One-time GitHub setup (you must do this once)
 
-1. Open **Settings → Pages** on the repo.
+The workflow **cannot** turn on Pages by itself. As **jdmcclellan4**:
+
+1. Open [Settings → Pages](https://github.com/jdmcclellan4/vfr_buddy_website/settings/pages).
 2. **Build and deployment** → Source: **GitHub Actions** (not “Deploy from a branch”).
-3. After a successful workflow run, under **Custom domain**, enter **`www.vfrbuddy.com`** and save.
-4. Wait for **DNS check** and **HTTPS** (can take up to an hour).
+3. **Actions** → **Deploy GitHub Pages** → **Run workflow** (branch `main`).
+4. When the run is green, back on **Pages**, set **Custom domain** to **`www.vfrbuddy.com`** and save.
+5. Wait for **DNS check** and **HTTPS** (can take up to an hour).
 
 The root **`CNAME`** file in the repo should contain `www.vfrbuddy.com`.
 
