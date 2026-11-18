@@ -1,11 +1,9 @@
 # vfrbuddy.com outage recovery
 
-**Live hosting (now):** GitHub Pages via `.github/workflows/github-pages.yml` and root `CNAME` (`www.vfrbuddy.com`). GoDaddy **www** should point at GitHub (see repo **Settings → Pages** for the exact DNS targets if not using the `CNAME` file alone).
+**Live hosting:** [GITHUB-PAGES.md](GITHUB-PAGES.md) — GitHub Actions + **www** CNAME → `jdmcclellan4.github.io`.
 
-**Long-term / Azure path:** [AZURE-RESTORE.md](AZURE-RESTORE.md)
+**Azure (optional):** [AZURE-RESTORE.md](AZURE-RESTORE.md) — not required for the site to stay up.
 
 ## Summary
 
-The old Azure Static Web App (`red-field-0c4740a10.7.azurestaticapps.net`) is gone and `AZURE_STATIC_WEB_APPS_API_TOKEN` is invalid, so Azure deploys fail until you recreate the SWA and update the secret.
-
-Until Azure is restored, keep GitHub Pages enabled and **do not** remove the root `CNAME` or the Pages workflow.
+`www.vfrbuddy.com` was still aimed at deleted Azure (`red-field-0c4740a10.7.azurestaticapps.net`) → 404. Point DNS at GitHub Pages and enable Pages on the repo.
