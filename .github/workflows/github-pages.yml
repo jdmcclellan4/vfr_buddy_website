@@ -9,6 +9,8 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # Required once so configure-pages can turn on GitHub Actions as the Pages source.
+  administration: write
 
 concurrency:
   group: pages
